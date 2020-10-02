@@ -1,0 +1,26 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    
+    <!--<constant name="struts.action.extension" value="blb" />-->
+    <constant name="struts.action.extension" value="blb"/>
+    <package name="packglobal" namespace="/" extends="struts-default, json-default">
+        <interceptors>
+            <interceptor name="AccessControl" class="com.struts2.util.interceptor.InterceptorClass" />
+            <interceptor-stack name="DefaultStack">
+                <interceptor-ref name="modelDriven"/>
+                <interceptor-ref name="basicStack"/>
+                <interceptor-ref name="AccessControl"/>
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="DefaultStack"/>
+        
+        
+        <global-results>
+            <result name="loginpage">WEB-INF/view/login.jsp</result>
+        </global-results>
+    </package>
+    <include file="example.xml"/> 
+</struts>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    
+   <!-- <package name="login" namespace="/view" extends="struts-default, json-default">   
+         <interceptors>
+            <interceptor class="com.struts2.util.interceptor.InterceptorClass" name="loginInterceptor"/>
+            
+            
+            <interceptor-stack name="loginStack">
+                <interceptor-ref name="loginInterceptor"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+        </interceptors>
+        
+        
+        <global-results>
+            <result name="login">login.jsp</result>
+        </global-results>
+        
+        <action name="LoginAction" class="com.struts2.action.loginaction.LoginAction">
+           
+            <result name="success" type="redirect">homeAction.struts</result>
+            
+            <result name="fail" type="dispatcher">/view/login.jsp</result>
+            
+        </action>
+        
+        <action name="homeAction" method="home" class="com.struts2.action.loginaction.LoginAction">
+            <interceptor-ref name="loginStack"/>
+            <result name="success" type="redirect">ViewDashBoard.struts</result>
+            
+        </action>
+        
+         <action name="*DashBoard" method="{1}" class="com.struts2.action.dashboardaction.DashBoardAction" >
+            <interceptor-ref name="loginStack"/>
+            <result name="view"  type="dispatcher">/view/dashboard.jsp</result>
+            <result name="list"  type="json"></result> 
+            
+            
+        </action>
+        
+       
+        
+        <action name="EditAction" class="com.struts2.action.editaction.EditAction">
+            <interceptor-ref name="loginStack"/>
+            <result name="edit"  type="dispatcher">/view/edit.jsp</result>
+            
+        </action>
+        <action name="EditedAction" class="com.struts2.action.editaction.EditedAction">
+           <interceptor-ref name="loginStack"/>
+            <result name="edited" type="redirect">ViewDashBoard.struts</result>
+        </action>
+        
+        <action name="DeleteAction" class="com.struts2.action.deleteaction.DeleteAction">
+            <interceptor-ref name="loginStack"/>
+            <result name="deleted" type="redirect">ViewDashBoard.struts</result>
+        </action>
+        
+        <action name="ShowRegister">
+            
+            <result>/view/register.jsp</result>
+        </action>
+        
+       
+        <action name="Register"  class="com.struts2.action.registeraction.RegisterAction">
+          
+            <result name="add">/view/login.jsp</result>
+        </action>
+        
+        <action name="Logout" class="com.struts2.action.logoutaction.LogoutAction">
+            <interceptor-ref name="loginStack"/>
+            <result>login.jsp</result>
+        </action>
+        
+        
+    </package>-->
+    
+<!--    <package name="dashBoard" extends="struts-default" namespace="/">-->
+       
+<!--    </package>-->
+
+    <package name="login" extends="struts-default, json-default" namespace="/">
+        
+        <interceptors>
+            <interceptor name="AccessControl" class="com.struts2.util.interceptor.InterceptorClass" />
+            <interceptor-stack name="DefaultStack">
+                <interceptor-ref name="modelDriven"/>
+                <interceptor-ref name="basicStack"/>
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="DefaultStack"/>
+         <global-results>
+            <result name="loginpage">WEB-INF/view/login.jsp</result>
+        </global-results>
+        
+        <action name="*UserLogin" method="{1}" class="com.struts2.action.loginaction.LoginAction">
+            <result name="getdash" type="redirect">ViewDashBoard.blb</result>
+            <result name="loginpage">/WEB-INF/view/login.jsp</result>
+            <result name="add">/WEB-INF/view/register.jsp</result>    
+        </action>
+        
+        
+        
+        
+    </package>
+    
+    <package name="DashBoard" extends="packglobal" namespace="/">
+        <action name="*DashBoard" method="{1}" class="com.struts2.action.dashboardaction.DashBoardAction">
+            <result name="view">/WEB-INF/view/dashboard.jsp</result>
+            <result name="edit">/WEB-INF/view/edit.jsp</result>
+            <result name="edited" type="redirect">ViewDashBoard.blb</result>
+            <result name="deleted" type="redirect">ViewDashBoard.blb</result>
+            <result name="logout">/WEB-INF/view/login.jsp</result>
+            <result name="list" type="json"></result>
+            <result name="find" type="json"></result>
+            <result name="editj" type="json"></result>
+            <result name="deletej" type="json"></result>
+        </action>
+        
+    </package>
+  
+    <package name="Register" extends="struts-default" namespace="/">        
+        <action name="*Register" method="{1}" class="com.struts2.action.registeraction.RegisterAction">
+            <result name="add">/WEB-INF/view/login.jsp</result>
+        </action>
+    </package>
+    
+</struts>
+
